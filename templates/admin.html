@@ -1,0 +1,7 @@
+{% for post in busca %}
+        <p>ID: {{ post.0 }} - User: {{ post.1 }} - Email: {{ post.2 }}</p>
+        <p>Author: {{ post.4 }} - Theme: {{ post.5 }}</p>
+        <p>Title: {{ post.3 }}</p>
+        <p>Content: {{ post.6 }}</p>
+        <hr>
+{% endfor %}

@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg" style="background-color: whitesmoke;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-body-secondary" href="{{ url_for('home') }}">My Blogger</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-body-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#exampleModal">Login</a>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Blogger Login</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('user_page') }}" method="POST" id="login">
+                        {{ login.hidden_tag() }}
+                        {{ login.name.label(class="form-label") }}
+                        {{ login.name(class="form-control") }}
+                        {{ login.pwd.label(class="form-label") }}
+                        {{ login.pwd(class="form-control") }}
+                        <div class="modal-footer">
+                          <a class="nav-link active text-body-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal_1" href="#exampleModal_1">Forgot Password</a>
+                          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_login">Submit</button>
+                        </div>
+                      </form>
+                      <script>
+                        document.getElementById('btn_login').addEventListener('click', function() {
+                          document.getElementById('login').submit();
+                        });
+                        </script>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- Forget Password -->
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal_1" tabindex="-1" aria-labelledby="exampleModalLabel_1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel_1">Reset Password</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="post">
+                        <form action="" method="post">
+                          {{ reset.hidden_tag() }}
+                          {{ reset.email.label(class="form-label") }}
+                          {{ reset.email(class="form-control") }}
+                          {{ reset.pwd.label(class="form-label") }}
+                          {{ reset.pwd(class="form-control") }}
+                          {{ reset.pwd_2.label(class="form-label") }}
+                          {{ reset.pwd_2(class="form-control") }}
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-light">Submit</button>
+                          </div>
+                        </form>
+                      </form>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Forget Password -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-body-secondary" data-bs-toggle="modal" data-bs-target="#register" href="#register">Register</a>
+              <!-- Register User -->
+              <!-- Modal -->
+              <div class="modal fade" id="register" tabindex="-1" aria-labelledby="register" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="register">Register your user</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="post">
+                        <form action="" method="post">
+                          {{ register.hidden_tag() }}
+                          {{ register.name.label(class="form-label") }}
+                          {{ register.name(class="form-control") }}
+                          {{ register.user.label(class="form-label") }}
+                          {{ register.user(class="form-control") }}
+                          {{ register.email.label(class="form-label") }}
+                          {{ register.email(class="form-control") }}
+                          {{ register.pwd.label(class="form-label") }}
+                          {{ register.pwd(class="form-control") }}
+                          {{ register.pwd_2.label(class="form-label") }}
+                          {{ register.pwd_2(class="form-control") }}
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-light">Submit</button>
+                          </div>
+                        </form>
+                      </form>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Register User -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-body-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal_5" href="#exampleModal_5">About</a>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal_5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">About this Blog</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h1>About Page</h1>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End About -->
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

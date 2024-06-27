@@ -1,0 +1,25 @@
+
+ {% if resultados %}
+    {% for resultado in resultados %}
+    <div class="container">
+        <hr>
+        <p>{{ resultado.0 }}</p>
+        <p>{{ resultado.1 }}</p>
+        <p>{{ resultado.2 }}</p>
+        <p>{{ resultado.3 }}</p>
+        <p>{{ resultado.5 }}</p>
+        <p>{{ resultado.6 }}</p>
+        <hr>
+    </div>
+    {% endfor %}
+ {% endif %}
+
+ {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <h5 class="text-center">{{ message }}</h5>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}

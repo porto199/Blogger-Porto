@@ -1,0 +1,279 @@
+<nav class="navbar navbar-expand-lg" style="background-color: whitesmoke">
+  <div class="container-fluid">
+    <a class="navbar-brand text-body-secondary" href="{{ url_for('home') }}">My
+      Blogger</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Blog Post Modal -->
+        <li class="nav-item">
+          <a class="nav-link active text-body-secondary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" href="#exampleModal">Create a
+            Post</a>
+            <style>
+              .drop-zone {
+                border: 2px dashed #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 10px;
+              }
+              .drop-zone.dragging {
+                border-color: #000;
+              }
+            </style>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hello {{ user }} and {{ id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{{ url_for('user_page') }}" method="POST" enctype="multipart/form-data" id="blog">
+                      {{ blog.hidden_tag() }}
+                      {{ blog.title.label(class='form-label') }}
+                      {{ blog.title(class='form-control') }}
+                      {{ blog.theme.label(class='form-label') }}
+                      {{ blog.theme(class='form-control') }}
+                      {{ blog.content.label(class='form-label') }}
+                      {{ blog.content(class='form-control', rows=6) }}
+        
+                      <input type="hidden" name="u_id" id="userIdField" value="{{ id }}" />
+                      <input type="hidden" name="u_user" id="userField" value="{{ user }}" />
+        
+                      <label for="images">Imagens:</label>
+                      <div class="drop-zone" id="drop-zone-images">Arraste e solte suas imagens aqui ou clique para selecionar</div>
+                      <input type="file" name="images" id="images" accept="image/*" multiple style="display:none;"><br>
+                      {% for image_filename in image_filenames %}
+                        <img src="{{ url_for('static', filename='thumbnails/thumb_' + image_filename) }}" alt="Thumbnail">
+                      {% endfor %}        
+        
+                      <label for="videos">Vídeos:</label>
+                      <div class="drop-zone" id="drop-zone-videos">Arraste e solte seus vídeos aqui ou clique para selecionar</div>
+                      <input type="file" name="videos" id="videos" accept="video/*" multiple style="display:none;"><br>
+                      {% for video_filename in video_filenames %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ url_for('static', filename='video/' + video_filename) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                      {% endfor %}
+        
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_blog">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <script>
+              // Arrastar e soltar para imagens
+              document.getElementById('drop-zone-images').addEventListener('click', function() {
+                document.getElementById('images').click();
+              });
+        
+              document.getElementById('drop-zone-images').addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragging');
+              });
+        
+              document.getElementById('drop-zone-images').addEventListener('dragleave', function() {
+                this.classList.remove('dragging');
+              });
+        
+              document.getElementById('drop-zone-images').addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragging');
+                document.getElementById('images').files = e.dataTransfer.files;
+              });
+        
+              // Arrastar e soltar para vídeos
+              document.getElementById('drop-zone-videos').addEventListener('click', function() {
+                document.getElementById('videos').click();
+              });
+        
+              document.getElementById('drop-zone-videos').addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragging');
+              });
+        
+              document.getElementById('drop-zone-videos').addEventListener('dragleave', function() {
+                this.classList.remove('dragging');
+              });
+        
+              document.getElementById('drop-zone-videos').addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragging');
+                document.getElementById('videos').files = e.dataTransfer.files;
+              });
+        
+              // Envio do formulário
+              document.getElementById("btn_blog").addEventListener("click", function (event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+                document.getElementById("blog").submit();
+              });
+            </script>
+          
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-body-secondary" data-bs-toggle="modal"
+            data-bs-target="#register" href="#register">My Posts</a>
+          <!-- Register User -->
+          <!-- Modal -->
+          <div class="modal fade" id="register" tabindex="-1"
+            aria-labelledby="register" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="register">Review your Posts</h5>
+                  <button type="button" class="btn-close"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Modal Body -->
+                  <h2>Review here your Posts</h2>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light"
+                    data-bs-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Register User -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-body-secondary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal_5" href="#exampleModal_5">My
+            Account</a>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal_5" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Edit your information
+                  </h5>
+                  <button type="button" class="btn-close"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h1>My Account Page</h1>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light"
+                    data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-second"
+                    data-bs-dismiss="modal">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End About -->
+        </li>
+      </ul>
+      <!-- nav_users.html -->
+      <form id="searchmodal" class="d-flex" role="search" method="POST">
+        <input class="form-control me-2" type="search" name="pesquisa"
+          id="search-input" placeholder="Search Post" aria-label="Search" />
+        <button class="btn btn-outline-secondary" type="button"
+          id="search-button" disabled>
+          Search
+        </button>
+        <a href="{{ url_for('home') }}"
+          class="btn btn-secondary mx-2">Logoff</a>
+      </form>
+
+      <!-- Modal Search -->
+      <div class="modal fade modal-xl" id="exampleModal_6" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Search Results</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+              <!-- Search results will be injected here -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light"
+                data-bs-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document
+          .getElementById("search-button")
+          .addEventListener("click", function () {
+            performSearch();
+          });
+
+        document
+          .getElementById("searchmodal")
+          .addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            performSearch();
+          });
+
+        document
+          .getElementById("search-input")
+          .addEventListener("input", function () {
+            var searchValue = document.getElementById("search-input").value;
+            document.getElementById("search-button").disabled =
+              searchValue.trim() === "";
+          });
+
+        function performSearch() {
+          var searchValue = document.querySelector(
+            'input[name="pesquisa"]'
+          ).value;
+
+          fetch("/user_page", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({ pesquisa: searchValue }),
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("modal-body-content").innerHTML = data;
+              var myModal = new bootstrap.Modal(
+                document.getElementById("exampleModal_6")
+              );
+              myModal.show();
+
+              document.getElementById("search-input").value = ""; // Limpa o campo de entrada
+              document.getElementById("search-button").disabled = true; // Desabilita o botão de pesquisa
+            })
+            .catch((error) => console.error("Error:", error));
+        }
+      </script>
+
+      <!-- Fim Modal Search -->
+    </div>
+  </div>
+</nav>

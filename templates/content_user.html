@@ -1,0 +1,38 @@
+{% extends 'user_base.html' %}
+
+{% block content_user %}
+    <h4>Wellcome {{ user }}!!!</h4>
+    {% for post in busca_posts %}
+    <div class="container">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#postModal{{ post.0 }}" style="text-decoration: none; color: black; font-size: 13px;">
+            <hr>
+            <p>User: {{ post.1 }}</p>
+            <p>Email: {{ post.2 }}</p>
+            <p>Author: {{ post.4 }}</p>
+            <p>Theme: {{ post.5 }}</p>
+            <p>Title: {{ post.3 }}</p>
+            <p>Content: {{ post.6 }}</p>
+            <hr>
+        </a>
+    </div>
+
+    <!-- Modal for each post -->
+    <div class="modal fade" id="postModal{{ post.0 }}" tabindex="-1" aria-labelledby="postModalLabel{{ post.0 }}" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel{{ post.0 }}">Post Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="font-size: 12px;">
+                    <p>ID: {{ post.0 }} - User: {{ post.1 }} - Email: {{ post.2 }}</p>
+                    <p>Author: {{ post.4 }} - Theme: {{ post.5 }}</p>
+                    <p>Title: {{ post.3 }}</p>
+                    <p>Content: {{ post.6 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
